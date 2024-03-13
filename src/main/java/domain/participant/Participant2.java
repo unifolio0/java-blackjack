@@ -6,6 +6,8 @@ import domain.participant.state.BlackJack;
 import domain.participant.state.Hit;
 import domain.participant.state.State;
 
+import java.util.List;
+
 public class Participant2 {
     private State state;
     private Name name;
@@ -27,5 +29,21 @@ public class Participant2 {
 
     public Name getName() {
         return name;
+    }
+
+    public List<Card> getCards() {
+        return state.getCards();
+    }
+
+    public boolean isHit() {
+        return state.isHit();
+    }
+
+    public void receiveCard(Card card) {
+        this.state = state.receiveCard(card);
+    }
+
+    public int getScore() {
+        return state.calculateScore();
     }
 }

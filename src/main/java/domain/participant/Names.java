@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class Names {
     private static final int MIN_PARTICIPANT_COUNT = 2;
     private static final int MAX_PARTICIPANT_COUNT = 8;
+
     private List<Name> value;
 
     public Names(List<String> names) {
@@ -29,5 +30,9 @@ public class Names {
         if (distinctNames.size() != names.size()) {
             throw new IllegalArgumentException("이름은 중복될 수 없습니다.");
         }
+    }
+
+    public List<Name> getValue() {
+        return value;
     }
 }
