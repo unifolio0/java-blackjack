@@ -2,7 +2,7 @@ package domain.participant;
 
 import domain.blackjack.BetAmount;
 
-public class Player extends Participant2 {
+public class Player extends Participant {
 
     private BetAmount betAmount;
 

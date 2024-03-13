@@ -1,76 +1,42 @@
 package controller;
 
 import domain.blackjack.BetAmount;
-import domain.blackjack.BettingResult;
 import domain.blackjack.BlackJack;
-import domain.participant.Dealer;
-import domain.participant.Participant;
-import domain.participant.Participants;
+import domain.participant.*;
 import view.InputView;
 import view.OutputView;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlackJackController {
-
-    private static final String HIT_OPTION = "y";
-
     public void run() {
-        List<String> names = InputView.inputParticipantName();
-        Participants participants = new Participants(names);
-        LinkedHashMap<Participant, BetAmount> betAmount = createBetAmount(participants);
+        Names names = new Names(InputView.inputParticipantName());
         Dealer dealer = new Dealer();
-        BlackJack blackJack = new BlackJack(dealer, participants);
-
+        List<Player> initPlayers = new ArrayList<>();
+        names.getValue()
+                .forEach(name -> initPlayers.add(new Player(name, new BetAmount(InputView.inputBetAmount(name)))));
+        Players players = new Players(initPlayers);
+        BlackJack blackJack = new BlackJack(players, dealer);
         blackJack.beginDealing(this::beginBlackJack);
-        blackJack.play(this::participantHit);
-        dealerHit(blackJack);
+        blackJack.playerHit();
+        blackJack.dealerHit();
+        printScore(dealer, players);
 
-        printScore(dealer, participants);
-        printResult(dealer, betAmount);
     }
 
-    private LinkedHashMap<Participant, BetAmount> createBetAmount(Participants participants) {
-        LinkedHashMap<Participant, BetAmount> betAmount = new LinkedHashMap<>();
-        for (Participant participant : participants.getValue()) {
-            betAmount.put(participant, new BetAmount(InputView.inputBetAmount(participant.getName())));
-        }
-        return betAmount;
-    }
-
-    private void beginBlackJack(Participants participants, Dealer dealer) {
-        OutputView.printBeginDealingInformation(participants);
+    private void beginBlackJack(Players players, Dealer dealer) {
+        OutputView.printBeginDealingInformation(players);
         OutputView.printDealerHands(dealer);
-        for (Participant participant : participants.getValue()) {
-            OutputView.printParticipantHands(participant);
+        for (Player player : players.getValue()) {
+            OutputView.printParticipantHands(player);
         }
     }
 
-    private void participantHit(Participant participant, Dealer dealer) {
-        while (isHitOption(participant)) {
-            participant.receiveCard(dealer.draw());
-            OutputView.printParticipantHands(participant);
-        }
-    }
-
-    private boolean isHitOption(Participant participant) {
-        return participant.canHit() && HIT_OPTION.equals(InputView.inputHitOption(participant.getName()));
-    }
-
-    private void dealerHit(BlackJack blackJack) {
-        OutputView.printDealerHit(blackJack.dealerHit());
-    }
-
-    private void printScore(Dealer dealer, Participants participants) {
+    private void printScore(Dealer dealer, Players players) {
         OutputView.printParticipantResult(dealer);
-        for (Participant participant : participants.getValue()) {
-            OutputView.printParticipantResult(participant);
+        for (Player player : players.getValue()) {
+            OutputView.printParticipantResult(player);
         }
-    }
-
-    private void printResult(Dealer dealer, LinkedHashMap<Participant, BetAmount> bet) {
-        BettingResult bettingResult = new BettingResult(bet, dealer);
-        OutputView.printBlackJackResult(bettingResult);
     }
 }

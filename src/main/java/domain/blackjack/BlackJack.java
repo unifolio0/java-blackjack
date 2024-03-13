@@ -1,39 +1,41 @@
 package domain.blackjack;
 
 import domain.participant.Dealer;
-import domain.participant.Participant;
-import domain.participant.Participants;
+import domain.participant.Player;
+import domain.participant.Players;
+import view.InputView;
+import view.OutputView;
 
 import java.util.function.BiConsumer;
 
 public class BlackJack {
+    private Players players;
+    private Dealer dealer;
 
-    private final Dealer dealer;
-    private final Participants participants;
-
-    public BlackJack(final Dealer dealer, final Participants participants) {
+    public BlackJack(Players players, Dealer dealer) {
+        this.players = players;
         this.dealer = dealer;
-        this.participants = participants;
     }
 
-    public void beginDealing(BiConsumer<Participants, Dealer> beginBlackJack) {
-        dealer.receiveCard();
-        dealer.receiveCard();
-        participants.beginDealing(dealer);
-
-        beginBlackJack.accept(participants, dealer);
+    public void beginDealing(BiConsumer<Players, Dealer> beginBlackJack) {
+        dealer.setting(dealer.draw(), dealer.draw());
+        players.setting(dealer);
+        beginBlackJack.accept(players, dealer);
     }
 
-    public void play(BiConsumer<Participant, Dealer> participantConsumer) {
-        participants.participantHit(participantConsumer, dealer);
-    }
-
-    public int dealerHit() {
-        int count = 0;
-        while (dealer.shouldHit()) {
-            dealer.receiveCard();
-            count++;
+    public void playerHit() {
+        for (Player player : players.getValue()) {
+            while (player.isHit() && InputView.inputHitOption(player.getName()).equals("y")) {
+                player.receiveCard(dealer.draw());
+                OutputView.printParticipantHands(player);
+            }
         }
-        return count;
+    }
+
+    public void dealerHit() {
+        while (dealer.isHit()) {
+            dealer.receiveCard(dealer.draw());
+            OutputView.printDealerHit();
+        }
     }
 }

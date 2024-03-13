@@ -10,15 +10,15 @@ public class Players {
         this.value = players;
     }
 
-    public void setting(Dealer2 dealer2) {
-        for (Participant2 participant2 : value) {
-            participant2.setting(dealer2.draw(), dealer2.draw());
+    public void setting(Dealer dealer) {
+        for (Participant participant : value) {
+            participant.setting(dealer.draw(), dealer.draw());
         }
     }
 
     public List<Name> getNames() {
         return value.stream()
-                .map(Participant2::getName)
+                .map(Participant::getName)
                 .toList();
     }
 

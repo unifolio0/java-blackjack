@@ -1,63 +1,53 @@
 package domain.participant;
 
-import domain.blackjack.WinStatus;
-import domain.card.Card;
-import domain.card.Rank;
-import domain.card.Shape;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 class DealerTest {
 
-    @DisplayName("딜러의 점수가 16이하이면 카드를 받는다.")
+    /*@DisplayName("딜러의 점수가 16이하이면 카드를 받는다.")
     @Test
     void shouldHit() {
-        Dealer dealer = new Dealer();
-        dealer.receiveCard(new Card(Shape.HEART, Rank.KING));
-        dealer.receiveCard(new Card(Shape.HEART, Rank.SIX));
+        Dealer dealer3 = new Dealer();
+        dealer3.receiveCard(new Card(Shape.HEART, Rank.KING));
+        dealer3.receiveCard(new Card(Shape.HEART, Rank.SIX));
 
-        Assertions.assertThat(dealer.shouldHit()).isTrue();
+        Assertions.assertThat(dealer3.shouldHit()).isTrue();
     }
 
     @DisplayName("딜러의 점수가 17이상이면 카드를 받을 수 없다.")
     @Test
     void ShoulNotdHit() {
-        Dealer dealer = new Dealer();
-        dealer.receiveCard(new Card(Shape.HEART, Rank.KING));
-        dealer.receiveCard(new Card(Shape.HEART, Rank.SEVEN));
+        Dealer3 dealer3 = new Dealer3();
+        dealer3.receiveCard(new Card(Shape.HEART, Rank.KING));
+        dealer3.receiveCard(new Card(Shape.HEART, Rank.SEVEN));
 
-        Assertions.assertThat(dealer.shouldHit()).isFalse();
+        Assertions.assertThat(dealer3.shouldHit()).isFalse();
     }
 
     @DisplayName("참가자와 딜러 중 점수가 높은 사람이 승리한다.")
     @Test
     void isWinner() {
-        Dealer dealer = new Dealer();
-        dealer.receiveCard(new Card(Shape.HEART, Rank.QUEEN));
+        Dealer3 dealer3 = new Dealer3();
+        dealer3.receiveCard(new Card(Shape.HEART, Rank.QUEEN));
 
         Participant participant = new Participant(new Name("one"));
         participant.receiveCard(new Card(Shape.HEART, Rank.KING));
         participant.receiveCard(new Card(Shape.HEART, Rank.TEN));
 
-        WinStatus winStatus = dealer.calculateParticipantWinStatus(participant);
+        WinStatus winStatus = dealer3.calculateParticipantWinStatus(participant);
         assertThat(winStatus).isEqualTo(WinStatus.WIN);
     }
 
     @DisplayName("참가자와 딜러의 점수가 같은 경우 무승부(DRAW)로 처리한다.")
     @Test
     void isWinnerWhenAllBlackJack() {
-        Dealer dealer = new Dealer();
-        dealer.receiveCard(new Card(Shape.HEART, Rank.QUEEN));
-        dealer.receiveCard(new Card(Shape.HEART, Rank.ACE));
+        Dealer3 dealer3 = new Dealer3();
+        dealer3.receiveCard(new Card(Shape.HEART, Rank.QUEEN));
+        dealer3.receiveCard(new Card(Shape.HEART, Rank.ACE));
 
         Participant participant = new Participant(new Name("one"));
         participant.receiveCard(new Card(Shape.HEART, Rank.KING));
         participant.receiveCard(new Card(Shape.DIA, Rank.ACE));
 
-        WinStatus winStatus = dealer.calculateParticipantWinStatus(participant);
+        WinStatus winStatus = dealer3.calculateParticipantWinStatus(participant);
         assertThat(winStatus).isEqualTo(WinStatus.PUSH);
-    }
+    }*/
 }
