@@ -10,4 +10,8 @@ public class Player extends Participant {
         super(name);
         this.betAmount = betAmount;
     }
+
+    public int getProfit(Dealer dealer) {
+        return (int) betAmount.calculateProfit(state.getProfit(dealer));
+    }
 }

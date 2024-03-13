@@ -9,7 +9,7 @@ import domain.participant.state.State;
 import java.util.List;
 
 public class Participant {
-    private State state;
+    protected State state;
     private Name name;
 
     public Participant(Name name) {
@@ -45,5 +45,13 @@ public class Participant {
 
     public int getScore() {
         return state.calculateScore();
+    }
+
+    public boolean isBlackJack() {
+        return state.isBlackJack();
+    }
+
+    public void stay() {
+        this.state = state.stay();
     }
 }

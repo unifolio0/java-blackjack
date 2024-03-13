@@ -22,7 +22,11 @@ public class BlackJackController {
         blackJack.playerHit();
         blackJack.dealerHit();
         printScore(dealer, players);
+        printResult(dealer, players);
+    }
 
+    private void printResult(Dealer dealer, Players players) {
+        OutputView.printBlackJackResult(dealer, players);
     }
 
     private void beginBlackJack(Players players, Dealer dealer) {

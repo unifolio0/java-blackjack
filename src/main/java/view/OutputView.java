@@ -42,4 +42,15 @@ public class OutputView {
         System.out.printf(outputFormat.formatParticipantResult(participant));
         System.out.println();
     }
+
+    public static void printBlackJackResult(Dealer dealer, Players players) {
+        System.out.println();
+        System.out.println("## 최종 수익");
+        System.out.printf(outputFormat.formatDealerResult(dealer, players));
+        System.out.println();
+
+        for (Player player : players.getValue()) {
+            System.out.println(outputFormat.formatBlackJackResult(dealer, player));
+        }
+    }
 }

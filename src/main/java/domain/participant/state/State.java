@@ -1,6 +1,7 @@
 package domain.participant.state;
 
 import domain.card.Card;
+import domain.participant.Dealer;
 
 import java.util.List;
 
@@ -18,4 +19,10 @@ public interface State {
     default boolean isHit() {
         return false;
     }
+
+    double getProfit(Dealer dealer);
+
+    State stay();
+
+    State bust();
 }

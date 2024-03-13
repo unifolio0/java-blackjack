@@ -25,9 +25,15 @@ public class BlackJack {
 
     public void playerHit() {
         for (Player player : players.getValue()) {
-            while (player.isHit() && InputView.inputHitOption(player.getName()).equals("y")) {
-                player.receiveCard(dealer.draw());
-                OutputView.printParticipantHands(player);
+            while (player.isHit()) {
+                String option = InputView.inputHitOption(player.getName());
+                if (option.equals("y")) {
+                    player.receiveCard(dealer.draw());
+                    OutputView.printParticipantHands(player);
+                }
+                if (option.equals("n")) {
+                    player.stay();
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ package domain.participant.state;
 
 import domain.card.Card;
 import domain.card.Hands;
+import domain.participant.Dealer;
 
 import java.util.List;
 
@@ -28,5 +29,20 @@ public class Bust implements State {
     @Override
     public State receiveCard(Card card) {
         throw new IllegalArgumentException("드로우 못 함");
+    }
+
+    @Override
+    public double getProfit(Dealer dealer) {
+        return -1;
+    }
+
+    @Override
+    public State stay() {
+        throw new IllegalArgumentException("stay 금지");
+    }
+
+    @Override
+    public State bust() {
+        return new Bust(hands);
     }
 }

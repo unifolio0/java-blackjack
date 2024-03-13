@@ -16,6 +16,14 @@ public class Players {
         }
     }
 
+    public int getDealerProfit(Dealer dealer) {
+        int total = 0;
+        for (Player player : value) {
+            total += player.getProfit(dealer);
+        }
+        return total * -1;
+    }
+
     public List<Name> getNames() {
         return value.stream()
                 .map(Participant::getName)

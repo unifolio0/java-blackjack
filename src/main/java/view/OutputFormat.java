@@ -36,4 +36,12 @@ public class OutputFormat {
     public String formatParticipantResult(Participant participant) {
         return String.format("%s - 결과: %d", formatHands(participant), participant.getScore());
     }
+
+    public String formatDealerResult(Dealer dealer, Players players) {
+        return String.format("딜러: %d", players.getDealerProfit(dealer));
+    }
+
+    public String formatBlackJackResult(Dealer dealer, Player player) {
+        return String.format("%s: %d", player.getName().getValue(), player.getProfit(dealer));
+    }
 }

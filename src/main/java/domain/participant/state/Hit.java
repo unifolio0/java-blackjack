@@ -2,6 +2,7 @@ package domain.participant.state;
 
 import domain.card.Card;
 import domain.card.Hands;
+import domain.participant.Dealer;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ public class Hit implements State {
         this.hands = hands;
     }
 
-    State stay() {
+    @Override
+    public State stay() {
         return new Stay(hands);
     }
 
@@ -39,5 +41,15 @@ public class Hit implements State {
     @Override
     public boolean isHit() {
         return true;
+    }
+
+    @Override
+    public double getProfit(Dealer dealer) {
+        throw new IllegalArgumentException("힛은 점수 계산 금지");
+    }
+
+    @Override
+    public State bust() {
+        return new Bust(hands);
     }
 }

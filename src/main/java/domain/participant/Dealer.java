@@ -15,4 +15,15 @@ public class Dealer extends Participant {
     public Card draw() {
         return deck.draw();
     }
+
+    @Override
+    public void receiveCard(Card card) {
+        state.receiveCard(card);
+        if (state.calculateScore() > 16) {
+            state = state.stay();
+        }
+        if (state.calculateScore() > 21) {
+            state = state.bust();
+        }
+    }
 }
